@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_VERTICES 50
+#define MAX_EDGES 100
+
+struct Edge {
+    int source;
+    int destination;
+    int cost;
+};
+
+char city[MAX_VERTICES][50];
+struct Edge edges[MAX_EDGES];
+
+int vertices = 0;
+int edgeCount = 0;
+
+int parent[MAX_VERTICES];
+int rankSet[MAX_VERTICES];
+
+struct Edge mst[MAX_VERTICES - 1];
+struct Edge rejected[MAX_EDGES];
+
+int mstCount = 0;
+int rejectedCount = 0;
+int totalCost = 0;
+
+int find(int x)
+{
+    if (parent[x] != x)
+        parent[x] = find(parent[x]);
+
+    return parent[x];
+}
+
+void unionSet(int x, int y)
+{
+    int rootX = find(x);
+    int rootY = find(y);
+
+    if (rootX == rootY)
+        return;
+
+    if (rank
